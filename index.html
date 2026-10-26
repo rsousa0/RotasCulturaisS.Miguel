@@ -1,0 +1,1169 @@
+<!DOCTYPE html>
+<html lang="pt">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rotas Culturais de São Miguel</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        :root {
+            --bg-color: #f4f7f6;
+            --text-color: #1a1a1a;
+            --card-bg: #ffffff;
+            --primary-color: #007bff;
+            --primary-hover: #0056b3;
+            --accent-color: #00a896;
+            --header-gradient: linear-gradient(135deg, #007bff, #4a90e2);
+            --border-color: #e0e0e0;
+            --shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.08), 0 8px 10px -6px rgba(0, 0, 0, 0.01);
+            --radius: 12px;
+        }
+
+        
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-color: #ffffff;
+                --text-color: #f0f0f0;
+                --card-bg: #1e1e1e;
+                --primary-color: #375a7f;
+                --primary-hover: #2b4764;
+                --accent-color: #02c39a;
+                --header-gradient: linear-gradient(135deg, #1f3c58, #2a52be);
+                --border-color: #333333;
+                --shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.5);
+            }
+        }
+        * {
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background-color: var(--bg-color);
+            color: #FFFFFF;
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        body .section-description {
+            font-size: 1rem;
+            color: #1a1a1a;
+            margin-bottom: 1.5rem;
+        }
+
+        p.bio {
+            font-size: 1.75rem;
+            color: #ffffff;
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+        /* HEADER & NAVIGATION */
+        header {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            padding: 1.5rem 2rem;
+            background: var(--header-gradient);
+            color: white;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        header .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+            color: white;
+        }
+
+        header .header-text {
+            text-align: center;
+            flex: 1;
+            padding: 0 1rem;
+        }
+
+        header h1 {
+            margin: 0;
+            margin-right: -10rem;
+            font-size: 1.8rem;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+        }
+
+        header p {
+            margin: 0.2rem 0 0 0;
+            margin-right: -10rem;
+            font-size: 1.25rem;
+            opacity: 0.9;
+        }
+
+        header .navigation {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        header .navigation .nav-btn,
+        header .navigation a button {
+            background: rgba(255, 255, 255, 0.15);
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: white;
+            padding: 10px 16px;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            text-decoration: none;
+        }
+
+        header .navigation button:hover,
+        header .navigation button.active {
+            border-radius: 7px;
+            background: white;
+            color: var(--primary-color);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        /* MAIN LAYOUT */
+        main {
+            max-width: 1200px;
+            width: 100%;
+            margin: 0 auto;
+            padding: 2rem 1.5rem;
+            flex: 1;
+        }
+
+        .section-title {
+            font-size: 1.8rem;
+            color: #2951b9;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 3px solid var(--primary-color);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .content-section {
+            display: none;
+            animation: fadeIn 0.4s ease-in-out forwards;
+        }
+
+        .content-section.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* CARDS & GRID */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .card {
+            background-color: #25478d;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border-color);
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        .card img {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+            cursor: pointer;
+            transition: opacity 0.2s ease;
+        }
+
+        .card img:hover {
+            opacity: 0.9;
+        }
+
+        .card-content {
+            padding: 1.25rem;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+        }
+
+        .card-content h3 {
+            margin: 0 0 0.5rem 0;
+            font-size: 1.2rem;
+            color: #FFFFFF;
+        }
+
+        .card-content p {
+            margin: 0;
+            font-size: 0.95rem;
+            color: var(--text-color);
+            opacity: 0.85;
+            flex-grow: 1;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-weight: bold;
+            background: #203d5f;
+            color: white;
+            margin-bottom: 8px;
+            width: fit-content;
+        }
+
+        /* HERO SECTION */
+        .hero {
+            background: #25478d;
+            border-radius: var(--radius);
+            padding: 2.5rem;
+            margin-bottom: 2rem;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border-color);
+            text-align: center;
+        }
+
+        .hero h2 {
+            margin-top: 0;
+            font-size: 2rem;
+            color: #FFFFFF;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .stat-card {
+            background: #203d5f;
+            padding: 1.5rem;
+            border-radius: var(--radius);
+            border: 1px solid var(--border-color);
+            text-align: center;
+        }
+
+        .stat-card i {
+            font-size: 2rem;
+            color: white;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-card h4 {
+            margin: 0;
+            font-size: 1.5rem;
+        }
+
+        /* AUDIO PLAYER STYLES */
+        .audio-player-container {
+            background: var(--header-gradient);
+            border-radius: var(--radius);
+            padding: 1.5rem;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border-color);
+            margin-bottom: 1.5rem;
+        }
+
+        .playlist {
+            list-style: none;
+            padding: 0;
+            margin: 1rem 0 0 0;
+        }
+
+        .playlist-item {
+            display: flex;
+            background: #1a3366;
+            align-items: center;
+            justify-content: space-between;
+            padding: 12px 16px;
+            border-radius: 8px;
+            border: 2px solid var(--border-color);
+            margin-bottom: 8px;
+            cursor: pointer;
+            transition: background 0.2s ease;
+        }
+
+        .playlist-item.active {
+            background: #2a51b9;
+            border-color: var(--primary-color);
+        }
+
+        .playlist-item:hover,
+        .playlist-item.active {
+            background: rgba(0, 123, 255, 0.1);
+            border-color: var(--primary-color);
+        }
+
+        /* VIDEO CONTAINER STYLES */
+        .video-container {
+            background: var(--header-gradient);
+            border-radius: var(--radius);
+            padding: 1.5rem;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border-color);
+        }
+
+        video {
+            width: 100%;
+            border-radius: 8px;
+            background: #000;
+            max-height: 480px;
+        }
+
+        .transcript-box {
+            background: rgba(0, 0, 0, 0.03);
+            border-left: 4px solid var(--primary-color);
+            padding: 1rem;
+            margin-top: 1rem;
+            border-radius: 0 8px 8px 0;
+            font-size: 0.9rem;
+        }
+
+        /* LIGHTBOX MODAL */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.85);
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .modal-content {
+            max-width: 90%;
+            max-height: 80vh;
+            border-radius: 8px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+        }
+
+        .modal-caption {
+            color: white;
+            text-align: center;
+            margin-top: 10px;
+            font-size: 1.1rem;
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            color: white;
+            font-size: 35px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        /* COMPLIANCE / CREDITS SECTION */
+        .compliance-card {
+            background: #25478d;
+            padding: 1.5rem;
+            border-radius: var(--radius);
+            border: 1px solid var(--border-color);
+            box-shadow: var(--shadow);
+            margin-bottom: 1.5rem;
+        }
+
+        .bio-compliance-card {
+            display: flex;
+            align-items: center;
+            background: #25478d;
+            padding: 1.5rem;
+            border-radius: var(--radius);
+            border: 1px solid var(--border-color);
+            box-shadow: var(--shadow);
+            margin-bottom: 1.5rem;
+        }
+
+        .compliance-cardFT {
+            background: #203d5f;
+            padding: 1.5rem;
+            border-radius: var(--radius);
+            border: 1px solid var(--border-color);
+            box-shadow: var(--shadow);
+            margin-bottom: 1.5rem;
+        }
+
+        .compliance-card h3 {
+            color: #ffffff;
+            margin-top: 0;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        /* FOOTER */
+        footer {
+            background: var(--header-gradient);
+            color: #ffffff;
+            padding: 2rem 1.5rem;
+            text-align: center;
+            margin-top: auto;
+            border-top: 3px solid var(--primary-color);
+        }
+
+        footer p {
+            margin: 0.5rem 0;
+            opacity: 0.8;
+            font-size: 0.9rem;
+        }
+
+        footer a {
+            color: rgb(255, 255, 255);
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+
+        /* RESPONSIVE DESIGN */
+        @media (max-width: 850px) {
+            header {
+                flex-direction: column;
+                text-align: center;
+                gap: 15px;
+                padding: 1rem;
+            }
+
+            header .logo {
+                justify-content: center;
+            }
+
+            header .navigation {
+                width: 100%;
+                justify-content: center;
+            }
+
+            header .navigation button {
+                border-radius: 10px;
+                padding: 8px 12px;
+                font-size: 0.85rem;
+            }
+            
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- HEADER / NAVIGATION NODE -->
+    <header>
+        <a href="#inicio" class="logo" onclick="switchTab('inicio');return false;">
+            <img src="logo/logo512.svg" alt="Logo Rotas Culturais" width="64" height="64" />
+        </a>
+
+        <div class="header-text">
+            <h1>Rotas Culturais de São Miguel</h1>
+            <p>Projeto Final de Hipertexto - Módulo 5 | Ferramentas Multimédia</p>
+        </div>
+
+        <nav class="navigation">
+            <!-- <button class="nav-btn active" onclick="switchTab('inicio')"><i class="fa-solid fa-house"></i> Início</button> -->
+            <button class="nav-btn" onclick="switchTab('fotografias')"><i class="fa-solid fa-camera"></i> Fotos</button>
+            <button class="nav-btn" onclick="switchTab('sons')"><i class="fa-solid fa-headphones"></i> Sons</button>
+            <button class="nav-btn" onclick="switchTab('videos')"><i class="fa-solid fa-video"></i> Vídeos</button>
+            <!--<button class="nav-btn" onclick="switchTab('creditos')"><i class="fa-solid fa-shield-halved"></i> Créditos & RGPD</button>-->
+        </nav>
+    </header>
+
+    <main>
+        <!-- NODE 1: INÍCIO / VISÃO GERAL -->
+        <section id="inicio" class="content-section active">
+            <div class="hero">
+                <h2>O DNA DE SÃO MIGUEL</h2>
+                <p>Bem-vindo ao portal interativo das Rotas Culturais da ilha de São Miguel. Este site unifica o
+                    trabalho dos módulos de Imagem, Som e Vídeo num único produto de hipertexto.</p>
+
+                <div class="stats-grid">
+                    <div class="stat-card" onclick="switchTab('fotografias')" style="cursor:pointer;">
+                        <i class="fa-solid fa-image"></i>
+                        <h4>Imagens Locais</h4>
+                        <p>Paisagens e locais turísticos capturados em alta definição.</p>
+                    </div>
+                    <div class="stat-card" onclick="switchTab('sons')" style="cursor:pointer;">
+                        <i class="fa-solid fa-microphone-lines"></i>
+                        <h4>Sons e Música</h4>
+                        <p>Música local, podcasts e sons naturais da ilha.</p>
+                    </div>
+                    <div class="stat-card" onclick="switchTab('videos')" style="cursor:pointer;">
+                        <i class="fa-solid fa-photo-film"></i>
+                        <h4>Vídeos</h4>
+                        <p>Excertos de vídeos capturados na ilha de São Miguel.</p>
+                    </div>
+                </div>
+            </div>
+
+            <h3 class="section-title"><i class="fa-solid fa-map-location-dot"></i> Destaques dos Percursos</h3>
+            <div class="grid">
+                <div class="card" onclick="openLightbox('img/seteCidades.JPG', 'Lagoa das Sete Cidades - Uma das sete maravilhas de Portugal, onde uma lagoa verde e lagoa azul repousam no fundo de uma cratera vulcânica.')">
+                    <img src="img/seteCidades.JPG" alt="Sete Cidades">
+                    <div class="card-content">
+                        <span class="badge">Paisagem Natural</span>
+                        <h3>Lagoa das Sete Cidades</h3>
+                        <p>Explore as lendas, os miradouros e o ecossistema único de uma das maravilhas naturais de
+                            Portugal.</p>
+                    </div>
+                </div>
+                <div class="card" onclick="openLightbox('img/furnasFumarolas.JPG', 'Fumarolas das Furnas - Vista das caldeiras onde são cozinhados os famosos cozidos das furnas.')">
+                    <img src="img/furnasFumarolas.JPG" alt="Furnas">
+                    <div class="card-content">
+                        <span class="badge">Rota Gastronómica & Geotérmica</span>
+                        <h3>Vale das Furnas</h3>
+                        <p>Tradições culinárias subterrâneas, caldeiras vulcânicas e os sons marcantes das caldeiras
+                            fervendo.</p>
+                    </div>
+                </div>
+                <div class="card" onclick="openLightbox('img/mosteiros.jpg', 'Mosteiros - Vista dos ilhéus dos Mosteiros e do calhau ao anoitecer.')">
+                    <img src="img/mosteiros.jpg" alt="Mosteiros">
+                    <div class="card-content">
+                        <span class="badge">Rota Gastronómica & Paisagem Natural</span>
+                        <h3>Paisagem dos Mosteiros</h3>
+                        <p>Um dos pontos mais emblemáticos da ilha, com praia e piscinas naturais e gastronomia
+                            deliciosa.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- NODE 2: FOTOGRAFIAS -->
+        <section id="fotografias" class="content-section">
+            <h2 class="section-title"><i class="fa-solid fa-pen-ruler"></i> Biblioteca de fotografias editadas do módulo
+                2</h2>
+            <p class="section-description">Selecione qualquer fotografia para ampliar. Esta secção apresenta as imagens
+                editadas para o módulo 2 (de autoria própria e foram otimizadas para web).</p>
+
+            <div class="grid">
+                <div class="card">
+                    <img src="img/imagens editadas/furnas.jpg" alt="Furnas"
+                        onclick="openLightbox(this.src, 'Fumarolas das Furnas - Vista das caldeiras onde são cozinhados os cozidos.')">
+                    <div class="card-content">
+                        <span class="badge">Módulo 2 - Imagem editada</span>
+                        <h3>Furnas</h3>
+                        <p>Fotografia com alto contraste. Otimizada para web (2677KB).</p>
+                    </div>
+                </div>
+                <div class="card">
+                    <img src="img/imagens editadas/lagoa do congro.jpg" alt="Lagoa do congro"
+                        onclick="openLightbox(this.src, 'Lagoa do Congro - Águas cristalinas e vegetação densa.')">
+                    <div class="card-content">
+                        <span class="badge">Módulo 2 - Imagem editada</span>
+                        <h3>Lagoa do Congro</h3>
+                        <p>Fotografia com cor da água alterada. Otimizada para web (1509KB).</p>
+                    </div>
+                </div>
+                <div class="card">
+                    <img src="img/imagens editadas/lagoa.jpg" alt="Lagoa"
+                        onclick="openLightbox(this.src, 'Lagoa - Caminho junto à costa marítima.')">
+                    <div class="card-content">
+                        <span class="badge">Módulo 2 - Imagem editada</span>
+                        <h3>Lagoa</h3>
+                        <p>Fotografia com alteração de cor e elementos externos. Otimizada para web (3661KB).</p>
+                    </div>
+                </div>
+                <div class="card">
+                    <img src="img/imagens editadas/nordeste.jpg" alt="Nordeste"
+                        onclick="openLightbox(this.src, 'Nordeste - Parque Florestral.')">
+                    <div class="card-content">
+                        <span class="badge">Módulo 2 - Imagem editada</span>
+                        <h3>Nordeste</h3>
+                        <p>Fotografia com alteração de cor e elementos externos. Otimizada para web (5985KB).</p>
+                    </div>
+                </div>
+                <div class="card">
+                    <img src="img/imagens editadas/pdl.jpg" alt="Ponta Delgada"
+                        onclick="openLightbox(this.src, 'Ponta Delgada - Avenida D. Infante Henrique.')">
+                    <div class="card-content">
+                        <span class="badge">Módulo 2 - Imagem editada</span>
+                        <h3>Ponta Delgada</h3>
+                        <p>Fotografia com elementos externos adicionados. Otimizada para web (4590KB).</p>
+                    </div>
+                </div>
+                <div class="card">
+                    <img src="img/imagens editadas/ribeira_Grande.jpg" alt="Ribeira Grande"
+                        onclick="openLightbox(this.src, 'Ribeira Grande - Miradouro de Santa Iria.')">
+                    <div class="card-content">
+                        <span class="badge">Módulo 2 - Imagem editada</span>
+                        <h3>Ribeira Grande</h3>
+                        <p>Fotografia com alto contraste. Otimizada para web (7986KB).</p>
+                    </div>
+                </div>
+            </div>
+            <h2 class="section-title"><i class="fa-solid fa-camera-retro"></i> Biblioteca de fotografias de autoria
+                própria.</h2>
+            <p class="section-description">Selecione qualquer fotografia para ampliar. Esta secção apresenta as imagens
+                captadas por © Rodrigo Sousa (otimizadas para web).</p>
+            <div class="grid">
+                <div class="card">
+                    <img src="img/imagens captadas/parqueUrbano.jpg" alt="Parque Urbano"
+                        onclick="openLightbox(this.src, 'Parque Urbano - O maior espaço verde no centro da cidade.')">
+                    <div class="card-content">
+                        <span class="badge">Imagem captada por © Rodrigo Sousa</span>
+                        <h3>Parque Urbano</h3>
+                        <p>Parque urbano, no centro de Ponta Delgada, ideal para atividades ao ar livre e passeios de
+                            família.</p>
+                    </div>
+                </div>
+                <div class="card">
+                    <img src="img/imagens captadas/bocaRibeira.jpg" alt="Boca da Ribeira"
+                        onclick="openLightbox(this.src, 'Boca da Ribeira - Piscina natural de Nordeste.')">
+                    <div class="card-content">
+                        <span class="badge">Imagem captada por © Rodrigo Sousa</span>
+                        <h3>Boca da Ribeira</h3>
+                        <p>Piscina natural situada na vila de Nordeste e com águas cristalinas.</p>
+                    </div>
+                </div>
+                <div class="card">
+                    <img src="img/imagens captadas/praiaMilicias.JPG" alt="Praia das Milicias"
+                        onclick="openLightbox(this.src, 'Praia das Milicias - Uma das praias mais conhecidas de S.Miguel.')">
+                    <div class="card-content">
+                        <span class="badge">Imagem captada por © Rodrigo Sousa</span>
+                        <h3>Praia das Milicias</h3>
+                        <p>Praia extensa e maravilhosa na zona de São Roque, em Ponta Delgada.</p>
+                    </div>
+                </div>
+                <div class="card">
+                    <img src="img/imagens captadas/lagoa7cidades.JPG" alt="Lagoa das Sete Cidades"
+                        onclick="openLightbox(this.src, 'Lagoa das Sete Cidades - Um dos pontos turísticos mais emblemáticos de S.Miguel.')">
+                    <div class="card-content">
+                        <span class="badge">Imagem captada por © Rodrigo Sousa</span>
+                        <h3>Lagoa das Sete Cidades</h3>
+                        <p>Lagoa de origem vulcânica com águas esverdeadas e paisagens deslumbrantes.</p>
+                    </div>
+                </div>
+                <div class="card">
+                    <img src="img/imagens captadas/praiaMosteiros.JPG" alt="Praia dos Mosteiros"
+                        onclick="openLightbox(this.src, 'Praia dos Mosteiros - Praia com vista para os icónicos ilhéus.')">
+                    <div class="card-content">
+                        <span class="badge">Imagem captada por © Rodrigo Sousa</span>
+                        <h3>Praia dos Mosteiros</h3>
+                        <p>Praia com vista bela situada na freguesia mais ao ocidente de S.Miguel.</p>
+                    </div>
+                </div>
+                <div class="card">
+                    <img src="img/imagens captadas/santaClara.JPG" alt="Santa Clara"
+                        onclick="openLightbox(this.src, 'Santa Clara - Ao fundo vê-se o Farol emblemático e com mais de 80 anos.')">
+                    <div class="card-content">
+                        <span class="badge">Imagem captada por © Rodrigo Sousa</span>
+                        <h3>Santa Clara</h3>
+                        <p>Freguesia junto ao centro de Ponta Delgada com uma costa rochosa extensa e bela vista.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- NODE 3: SONS / ÁUDIO -->
+        <section id="sons" class="content-section">
+
+            //Projeto Modulo 3 - Som
+            <h2 class="section-title"><i class="fa-solid fa-file-audio"></i> Biblioteca de áudios editados no módulo 3
+            </h2>
+            <div class="audio-player-container">
+                <h3><i class="fa-solid fa-compact-disc"></i> Reproduzir áudios do Módulo 3</h3>
+                <p id="audio-title">Selecione uma faixa da lista para ouvir...</p>
+
+                <audio id="project3-audio-player" controls style="width: 100%; margin-top: 10px;">
+                    <source src="" type="audio/wav">
+                    O seu navegador não suporta a reprodução de áudio.
+                </audio>
+
+                <ul class="playlist">
+                    <li class="playlist-item active"
+                        onclick="playAudio(src='project3/Banda/BandaOriginal.mp3', title='Faixa de áudio original da Banda', description='Áudio isolado de um vídeo captado, convertido para .mp3.')">
+                        <div>
+                            <strong>Banda - Faixa de áudio original</strong><br>
+                            <small>Áudio isolado de um vídeo captado, convertido para .mp3.</small>
+                        </div>
+                        <i class="fa-solid fa-circle-play"></i>
+                    </li>
+                    <li class="playlist-item"
+                        onclick="playAudio(src='project3/Banda/BandaEditada.AAC', title='Faixa de áudio editada da Banda', description='Áudio editado para apenas ouvir-se as frequências mais baixas.')">
+                        <div>
+                            <strong>Banda - Faixa de áudio editada</strong><br>
+                            <small>Áudio editado para apenas ouvir-se as frequências do tambor e dos pratos. Convertido
+                                para o formato AAC. Ajustes de volume e equalização.</small>
+                        </div>
+                        <i class="fa-solid fa-circle-play"></i>
+                    </li>
+                    <li class="playlist-item"
+                        onclick="playAudio(src='project3/Concerto/concertoOriginal.mp3', title='Faixa de áudio original do Concerto', description='Áudio isolado de um vídeo captado, convertido para .mp3.')">
+                        <div>
+                            <strong>Concerto - Faixa de áudio original</strong><br>
+                            <small>Áudio isolado de um vídeo captado, convertido para .mp3.</small>
+                        </div>
+                        <i class="fa-solid fa-circle-play"></i>
+                    </li>
+                    <li class="playlist-item"
+                        onclick="playAudio(src='project3/Concerto/concertoEditado.mp3', title='Faixa de áudio editada do Concerto', description='Áudio editado para apenas ouvir-se as vozes. Ajustes de volume e equalização.')">
+                        <div>
+                            <strong>Concerto - Faixa de áudio editada</strong><br>
+                            <small>Áudio editado para apenas ouvir-se as vozes. Ajustes de volume e equalização.</small>
+                        </div>
+                        <i class="fa-solid fa-circle-play"></i>
+                    </li>
+                    <li class="playlist-item"
+                        onclick="playAudio(src='project3/compression/Alta Qualidade.mp3', title='Faixa de áudio do concerto em Alta Qualidade', description='Áudio sem compressão nenhuma, em estado original.')">
+                        <div>
+                            <strong>Compressão - Faixa de áudio em Alta Qualidade</strong><br>
+                            <small>Áudio em alta qualidade, sem nenhuma compressão e em estado original. | Bitrate: 320 kbps | Tamanho: 1,33 MB</small>
+                        </div>
+                        <i class="fa-solid fa-circle-play"></i>
+                    </li>
+                    <li class="playlist-item"
+                        onclick="playAudio(src='project3/compression/Baixa Qualidade.mp3', title='Faixa de áudio do concerto em Baixa Qualidade', description='Áudio com muita compressão, resultante de uma conversão para formato MP3.')">
+                        <div>
+                            <strong>Compressão - Faixa de áudio em Baixa Qualidade</strong><br>
+                            <small>Áudio com compressão significativa, resultando em muita perda de definição e alguma informação. | Bitrate: 32 kbps | Tamanho: 141 KB</small>
+                        </div>
+                        <i class="fa-solid fa-circle-play"></i>
+                    </li>
+                </ul>
+            </div>
+
+            //Músicas feitas por Açorianos
+            <h2 class="section-title"><i class="fa-solid fa-music"></i> Músicas feitas por Açorianos</h2>
+
+            <div class="audio-player-container">
+                <h3><i class="fa-solid fa-compact-disc"></i> Reproduzir músicas locais</h3>
+                <p id="music-title">Selecione uma faixa da lista para ouvir...</p>
+
+                <audio id="music-audio-player" controls style="width: 100%; margin-top: 10px;">
+                    <source src="" type="audio/mp3">
+                    O seu navegador não suporta a reprodução de áudio.
+                </audio>
+
+                <ul class="playlist">
+                    <li class="playlist-item active"
+                        onclick="playMusic(src='music/Sandro G - Rabo de Peixe.mp3', title='Sandro G - Rabo de Peixe', description='Uma das músicas mais famosas dos Açores.')">
+                        <div>
+                            <strong>Sandro G - Rabo de Peixe</strong><br>
+                            <small>Música mais conhecida do rapper Sandro G. Já tem praticamente 23 anos e conta com
+                                2,8M de visualizações. | © Sandro G 2003, NZ Produções, Universal Music Portugal</small>
+                        </div>
+                        <i class="fa-solid fa-circle-play"></i>
+                    </li>
+                    <li class="playlist-item"
+                        onclick="playMusic(src='music/Sandro G - Festa.mp3', title='Sandro G - Festa', description='A segunda música mais famosa do rapper Açoreano Sandro G.')">
+                        <div>
+                            <strong>Sandro G - Festa</strong><br>
+                            <small>A segunda música mais famosa do rapper Sandro G. Já tem praticamente 16 anos e conta
+                                com 1,8M de visualizações.
+                                | © Sandro G 2010, NZ Produções, Universal Music Portugal</small>
+                        </div>
+                        <i class="fa-solid fa-circle-play"></i>
+                    </li>
+                    <li class="playlist-item"
+                        onclick="playMusic(src='music/Espama Trincana - Hino dos Açores.mp3', title='Espama Trincana - Hino dos Açores', description='Música de um rapper dos Açores em ascensão.')">
+                        <div>
+                            <strong>Espama Trincana - Hino dos Açores</strong><br>
+                            <small>Música do rapper Açoreano Espama Trincana, que conta com diversos hits e álbuns em
+                                alta e tem cerca de 140m ouvintes mensais. | © Espama Trincana 2025, Sony Music
+                                Portugal</small>
+                        </div>
+                        <i class="fa-solid fa-circle-play"></i>
+                    </li>
+                    <li class="playlist-item"
+                        onclick="playMusic(src='music/Eduardo Mourato - O Mar dos Açores.mp3', title='Eduardo Mourato - O Mar dos Açores', description='Música tradicional do Arquipélago dos Açores')">
+                        <div>
+                            <strong>Eduardo Mourato - O Mar dos Açores</strong><br>
+                            <small>Música típica dos Emigrantes do Arquipélago dos Açores. Foi lançado há 19 anos e já
+                                tem 2,1M de visualizações. | © Eduardo Mourato 2007, Independente</small>
+                        </div>
+                        <i class="fa-solid fa-circle-play"></i>
+                    </li>
+                    <li class="playlist-item"
+                        onclick="playMusic(src='music/YEYE - Se quiseres um burro.mp3', title='YÉYÉ - Se quiseres um burro', description='Música conhecida nos Açores do cantor YÉYÉ.')">
+                        <div>
+                            <strong>YÉYÉ - Se quiseres um burro</strong><br>
+                            <small>Música do cantor YÉYÉ. Comicamente conhecida nos Açores. Gravado há 16 anos e conta
+                                com 1,1M de visualizações.| © YÉYÉ 2010, Independente</small>
+                        </div>
+                        <i class="fa-solid fa-circle-play"></i>
+                    </li>
+
+                </ul>
+            </div>
+
+            //Bandas Filarmónicas dos Açores
+            <h2 class="section-title"><i class="fa-solid fa-drum"></i> Bandas Filarmónicas dos Açores</h2>
+            <div class="audio-player-container">
+                <h3><i class="fa-solid fa-compact-disc"></i> Reproduzir atuações das Bandas Filarmónicas</h3>
+                <p id="band-name">Selecione uma faixa da lista para ouvir...</p>
+
+                <audio id="band-audio-player" controls style="width: 100%; margin-top: 10px;">
+                    <source src="" type="audio/mp3">
+                    O seu navegador não suporta a reprodução de áudio.
+                </audio>
+
+                <ul class="playlist">
+                    <li class="playlist-item active"
+                        onclick="playBand(src='band/Banda Fundação Brasileira Mosteiros.mp3', title='Banda Fundação Brasileira dos Mosteiros', description='Uma das bandas filarmónicas mais proativas dos Açores.')">
+                        <div>
+                            <strong>Banda Fundação Brasileira dos Mosteiros</strong><br>
+                            <small>Sediada na freguesia dos Mosteiros, a Banda Fundação Brasileira dos Mosteiros é uma
+                                das bandas filarmónicas mais proativas dos Açores. | © Banda Fundação Brasileira dos
+                                Mosteiros desde 1863</small>
+                        </div>
+                        <i class="fa-solid fa-circle-play"></i>
+                    </li>
+                    <li class="playlist-item"
+                        onclick="playBand(src='band/Banda Lira do Norte Rabo de Peixe.mp3', title='Banda Lira do Norte de Rabo de Peixe', description='Banda situada na zona norte da ilha, na cidade da Ribeira Grande.')">
+                        <div>
+                            <strong>Banda Lira do Norte de Rabo de Peixe</strong><br>
+                            <small>Banda sediada em Rabo de Peixe, na zona norte da ilha, na cidade da Ribeira Grande. |
+                                © Banda Lira do Norte de Rabo de Peixe desde 1867</small>
+                        </div>
+                        <i class="fa-solid fa-circle-play"></i>
+                    </li>
+                    <li class="playlist-item"
+                        onclick="playBand(src='band/Filarmónica Aliança dos Prazeres Pico da Pedra.mp3', title='Banda Filarmónica Aliança dos Prazeres do Pico da Pedra', description='Banda situada no Pico da Pedra, na cidade da Ribeira Grande.')">
+                        <div>
+                            <strong>Banda Filarmónica Aliança dos Prazeres do Pico da Pedra</strong><br>
+                            <small>Banda sediada em Pico da Pedra, na zona norte da ilha, na cidade da Ribeira Grande. |
+                                © Banda Filarmónica Aliança dos Prazeres do Pico da Pedra desde 1958</small>
+                        </div>
+                        <i class="fa-solid fa-circle-play"></i>
+                    </li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- NODE 4: VÍDEOS -->
+        <section id="videos" class="content-section">
+            <h2 class="section-title"><i class="fa-solid fa-clapperboard"></i> Produção de Vídeo</h2>
+
+            <div class="video-container">
+                <h3>Vídeo 1: "Run Boy Run" © Rodrigo Sousa, Imagens e Edição 2026</h3>
+                <p>Criado para o Módulo 4 - Vídeo | Codec H.264 | Formato: .mp4 | Resolução: 4k a 9:16 | Tamanho: 31,4 MB</p>
+
+                <video id="video1" controls
+                    poster="project4/thumbRunBoyRun.png">
+                    <source src="project4/Run Boy Run.mp4"
+                        type="video/mp4">
+                    <track kind="subtitles" srclang="pt" label="Português" default>
+                    O seu navegador não suporta reprodução de vídeo HTML5.
+                </video>
+            </div>
+            <br>
+            <div class="video-container">
+                <h3>Vídeo 2: "Bad Bunny" © Francisco Barbosa, Imagens e Edição 2026</h3>
+                <p>Criado para o Módulo 4 - Vídeo | Codec H.264 | Formato: .mp4 | Resolução: 4k a 16:9 | Tamanho: 11,2 MB</p>
+            
+                <video id="video2" controls poster="project4/thumbBadBunny.png">
+                    <source src="project4/BadBunny.mp4" type="video/mp4">
+                    <track kind="subtitles" srclang="pt" label="Português" default>
+                    O seu navegador não suporta reprodução de vídeo HTML5.
+                </video>
+            </div>
+            <br>
+            <div class="video-container">
+                <h3>Vídeo 3: "Vídeo Final" © Rodrigo Sousa, Edição 2026</h3>
+                <p>Criado para o Módulo 4 - Vídeo | Codec H.264 | Formato: .mp4 | Resolução: 1080p a 16:9 | Tamanho: 33,2 MB</p>
+            
+                <video id="video3" controls poster="project4/thumbFinal.png">
+                    <source src="project4/Video Final FHD.mp4" type="video/mp4">
+                    <track kind="subtitles" srclang="pt" label="Português" default>
+                    O seu navegador não suporta reprodução de vídeo HTML5.
+                </video>
+            </div>
+        </section>
+
+        <!-- NODE 5: CRÉDITOS, LICENÇAS, RGPD E IA -->
+        <section id="creditos" class="content-section">
+            <h2 class="section-title"><i class="fa-solid fa-file-contract"></i> Licenciamento & Ficha Técnica</h2>
+            <details class="compliance-card">
+                <summary> Clique para expandir a ficha técnica dos projetos</summary>
+            <br>
+            <div class="compliance-cardFT">
+                <h3><i class="fa-solid fa-user"></i> Projeto Módulo 5 - Ficha Técnica</h3>
+                <p><strong>Autor do Projeto:</strong> Rodrigo de Jesus Sousa</p>
+                <p><strong>Curso:</strong> CTeSP Desenvolvimento de Aplicações Web (DAW) - Universidade dos Açores</p>
+                <p><strong>Unidade Curricular:</strong> Ferramentas Multimédia | Projeto Final</p>
+                <p><strong>Módulo:</strong> Módulo 5 - Hipertexto</p>
+
+                <p><strong>Resumo:</strong> Elaborei um website que agrega todo o conteúdo produzido nos módulos anteriores (Imagem, Som e Vídeo).
+                <br>Seguindo aquilo que foi proposto no tema inicial 'Rotas Culturais de São Miguel', foram referidos diversos locais e paisagens da ilha.</p>
+
+                <p><strong>Software utilizado:</strong> VS Code (HTML, CSS, JavaScript).</p>
+            </div>
+            <div class="compliance-cardFT">
+                <h3><i class="fa-solid fa-users"></i> Projeto Módulo 4 - Ficha Técnica</h3>
+                <p><strong>Autores do Projeto:</strong> Rodrigo de Jesus Sousa | Francisco Costa Barbosa</p>
+                <p><strong>Curso:</strong> CTeSP Desenvolvimento de Aplicações Web (DAW) - Universidade dos Açores</p>
+                <p><strong>Unidade Curricular:</strong> Ferramentas Multimédia</p>
+                <p><strong>Módulo:</strong> Módulo 4 - Vídeo</p>
+
+                <p><strong>Resumo:</strong> O grupo elaborou uma conjunção do módulo de Som e de Imagem.
+                    <br>Fizemos uma espécie de documentário a mostrar o que foi feito no próprio módulo 4, módulo 3 e módulo 2.</p>
+                <p><strong>Softwares utilizados:</strong> Adobe Premiere Pro 2025 e Capcut.</p>
+            </div>
+            <div class="compliance-cardFT">
+                <h3><i class="fa-solid fa-users"></i> Projeto Módulo 3 - Ficha Técnica</h3>
+                <p><strong>Autores do Projeto:</strong> Rodrigo de Jesus Sousa | Francisco Costa Barbosa</p>
+                <p><strong>Curso:</strong> CTeSP Desenvolvimento de Aplicações Web (DAW) - Universidade dos Açores</p>
+                <p><strong>Unidade Curricular:</strong> Ferramentas Multimédia</p>
+                <p><strong>Módulo:</strong> Módulo 3 - Som</p>
+                <p><strong>Resumo:</strong> O grupo elaborou uma demonstração do que é possível fazer para manipular uma faixa de som.
+                    <br>Foram feitos ajustes de ganho de volume, equalização, compressão e isolamento de frequências de som.
+                    <br>Seguindo aquilo que foi proposto no tema inicial 'Rotas Culturais de São Miguel', foram utilizados excertos de som gravados na própria ilha.
+                </p>
+                <p><strong>Softwares utilizados:</strong> Adobe Audition 2025, FL Studio e Audacity.</p>
+            </div>
+            <div class="compliance-cardFT">
+                <h3><i class="fa-solid fa-users"></i> Projeto Módulo 2 - Ficha Técnica</h3>
+                <p><strong>Autores do Projeto:</strong> Rodrigo de Jesus Sousa | Henrique Pacheco Trindade | Francisco Costa Barbosa</p>
+                <p><strong>Curso:</strong> CTeSP Desenvolvimento de Aplicações Web (DAW) - Universidade dos Açores</p>
+                <p><strong>Unidade Curricular:</strong> Ferramentas Multimédia</p>
+                <p><strong>Módulo:</strong> Módulo 2 - Imagem</p>
+                <p><strong>Resumo:</strong> O grupo criou um logótipo em svg e editou imagens incluindo elementos externos.
+                    <br>Foram feitos ajustes de cor, iluminação, recorte de objetos e adição de elementos externos.
+                    <br>Seguindo aquilo que foi proposto no tema inicial 'Rotas Culturais de São Miguel', foram utilizadas fotografias da própria ilha.
+                </p>
+                <p><strong>Softwares utilizados:</strong> Adobe Photoshop 2025 e GIMP.</p>
+            </div>
+        </details>
+
+            <div class="compliance-card">
+                <h3><i class="fa-solid fa-copyright"></i> Direitos de Autor e Licenciamento</h3>
+                <p><strong>Projeto de Imagem:</strong>
+                    <br>• Usado o elemento <a href="https://elements.envato.com/pt-br/airplane-banner-XZCZAPV" target="_blank" style="color: #FFFFFF;">Banner de avião</a> do autor PixelSquid360 para "pdl.jpg" (Licença gratuita para uso escolar).
+                    <br>• Usado o elemento <a href="https://www.pngwing.com/en/free-png-tbzcb" target="_blank"style="color: #FFFFFF;">Carro</a> do site PNG Wing para "nordeste.jpg" (Licença gratuita).
+                    <br>• Usado o elemento <a href="https://www.pngwing.com/en/free-png-pyweq" target="_blank"style="color: #FFFFFF;">Nuvens</a> do site PNG Wing para "lagoa.jpg" (Licença gratuita).
+                    <br><strong>• Todas as imagens utilizadas são de autoria própria dos elementos do grupo.</strong></p>
+                <p><strong>Projeto de Som:</strong>
+                    <br>• Usado o elemento <a href="https://pixabay.com/sound-effects/film-special-effects-transition-base-121422/" target="_blank" style="color: #FFFFFF;">Transition-Base</a> do autor Trading_Nation para "intro.mp3".
+                    <br>• "Loucos" &copy; Matias Damásio, Arca Velha Entretenimento, Lda. 2015 - foi usada para fins académicos e sem fins lucrativos.
+                    <br>• A atuação da banda filarmónica do Norte não está protegida por direitos de autor.</p>
+                <p><strong>Projeto de Vídeo:</strong>
+                    <br>• Usados os elementos <a href="https://pixabay.com/pt/music/corporativo-podcast-podcast-music-617077/" target="_blank" style="color: #FFFFFF">Podcast-Music</a> do autor NastelBorn e "intro.mp3" (créditos já mencionados) para o vídeo final.
+                    <br>• "LA MuDANZA" &copy; BadBunny, Álbum Debí Tirar Más Fotos, The Orchard Enterprises 2025 - utilizada para fins académicos e sem fins lucrativos.
+                    <br>• "Run Boy Run" &copy; WOODKID, Álbum The Golden Age, PIAS France, Polydor / Island Records (Universal Music Group) 2013 - foi utilizada para fins académicos e sem fins lucrativos.
+                    </p>
+                <p><strong>Projeto de Hipertexto:</strong>
+                    <br>• Música - Rabo de Peixe | © Sandro G 2003, NZ Produções, Universal Music Portugal.
+                    <br>• Música - Festa | © Sandro G 2010, NZ Produções, Universal Music Portugal.
+                    <br>• Música - Hino dos Açores | © Espama Trincana 2025, Sony Music Portugal.
+                    <br>• Música - Mar dos Açores | © Eduardo Mourato 2007, Independente.
+                    <br>• Música - Burro | © YEYE 2010, Independente.
+                    <br>• Banda - © Banda Fundação Brasileira, Mosteiros desde 1863.
+                    <br>• Banda - © Banda Lira do Norte, Rabo de Peixe desde 1867.
+                    <br>• Banda - © Banda Filarmónica Aliança dos Prazeres, Pico da Pedra desde 1958.
+                    <br>• Recursos de terceiros: Ícones via FontAwesome (OFL/MIT).
+            </div>
+
+            <div class="compliance-card">
+                <h3><i class="fa-solid fa-user-shield"></i> Privacidade e Conformidade RGPD</h3>
+                <p>Este site web não recolhe, armazena ou processa dados pessoais de visitantes. Este site funciona como
+                    um "portefólio" para apresentar os trabalhos académicos. Todos os intervenientes cujos rostos ou
+                    vozes surgem nos conteúdos multimédia, são 100% digitais criados com o auxílio de IA.</p>
+            </div>
+
+            <div class="compliance-card">
+                <h3><i class="fa-solid fa-robot"></i> Declaração de Transparência sobre IA</h3>
+                <p>Em conformidade com as regras de transparência da União Europeia e do enunciado do projeto:</p>
+                <ul>
+                    <li><strong>Código HTML/CSS/JS:</strong> Algumas correções de sintaxe do código e a otimização de acessibilidade e responsividade foi feita com apoio da ferramenta AI Claude.</li>
+                </ul>
+            </div>
+        </section>
+        <!-- NODE 6: SOBRE -->
+        <section id="sobre" class="content-section">
+            <h2 class="section-title"><i class="fa-solid fa-user"></i> Sobre mim</h2>
+        <div class="bio-compliance-card">
+            <p class="bio">Bem-vindo à minha biografia!
+            <br>Chamo-me Rodrigo Sousa, tenho 20 anos e sou estudante do primeiro ano do CTeSP DAW na Universidade dos Açores.
+            <br>Este site apresenta, em conjunto, os meus trabalhos académicos na Unidade Curricular Ferramentas Multimédia.
+            <br>Tal como a maioria dos programadores, comecei a programar na escola com um simples "Hello, World!" em C++.
+            <br>Foi a partir daqui que comecei a explorar um pouco do mundo da programação.
+            <br>
+            <a href="https://www.linkedin.com/in/rjsousa06/" target="_blank" class="linkedin-link" style="color: #FFFFFF;"><i class="fa-brands fa-linkedin" style="color: #FFFFFF;"></i> LinkedIn</a>
+            <a href="https://github.com/rsousa0" target="_blank" class="github-link" style="color: #FFFFFF;"><i class="fa-brands fa-github" style="color: #FFFFFF;"></i> GitHub</a>
+            </p>
+            <img src="img/me.jpg" alt="Rodrigo Sousa" style="width: 512px; height: 512px; border-radius: 10px;">
+        </div>
+        </section>
+    </main>
+
+    <!-- LIGHTBOX MODAL FOR IMAGES -->
+    <div id="lightbox-modal" class="modal" onclick="closeLightbox()">
+        <span class="close-modal" onclick="closeLightbox()">&times;</span>
+        <img class="modal-content" id="modal-img" alt="Imagem Ampliada" onclick="event.stopPropagation();">
+        <div class="modal-caption" id="modal-caption" onclick="event.stopPropagation();"></div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer>
+        <p><strong><a href="#sobre" onclick="switchTab('sobre');return false;">&copy; Rodrigo Sousa 2026</a> | <a href="https://esta.uac.pt/cursos/tecnico-superior-profissional-em-desenvolvimento-de-aplicacoes-web/" target="_blank">CTeSP DAW</a> | <a href="https://www.uac.pt/" target="_blank">Universidade dos Açores</a></strong></p>
+        <p>
+            <a href="#inicio" onclick="switchTab('inicio');return false;">Início</a> |
+            <a href="#fotografias" onclick="switchTab('fotografias');return false;">Fotografias</a> |
+            <a href="#sons" onclick="switchTab('sons');return false;">Sons</a> |
+            <a href="#videos" onclick="switchTab('videos');return false;">Vídeos</a> |
+            <a href="#creditos" onclick="switchTab('creditos');return false;">Créditos, Licenças & RGPD</a>
+        </p>
+    </footer>
+
+    <!-- JavaScript (Navegação & Controlos de media) -->
+    <script>
+        // Impede o browser de restaurar a posição do scroll ao dar F5
+        if ('scrollRestoration' in history) {
+            history.scrollRestoration = 'manual';
+        }
+
+        // SPA Navigation Logic entre os 5 nodes
+        function switchTab(sectionId) {
+            // Hide all content sections
+            const sections = document.querySelectorAll('.content-section');
+            sections.forEach(sec => sec.classList.remove('active'));
+
+            // Show selected section
+            const targetSection = document.getElementById(sectionId);
+            if (targetSection) {
+                targetSection.classList.add('active');
+            }
+
+            // Update Header Buttons Active State
+            const buttons = document.querySelectorAll('header .navigation .nav-btn');
+            buttons.forEach(btn => {
+                btn.classList.remove('active');
+                if (btn.getAttribute('onclick').includes(sectionId)) {
+                    btn.classList.add('active');
+                }
+            });
+
+            // Pausa todo o áudio e vídeo ao mudar de secção
+            document.querySelectorAll('audio, video').forEach(media => media.pause());
+
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+        // Função para reproduzir faixas de áudio do módulo 3
+        function playAudio(src, title, element) {
+            const playerAudio = document.getElementById('project3-audio-player');
+            const titleDisplay = document.getElementById('audio-title');
+
+            playerAudio.src = src;
+            playerAudio.play();
+            titleDisplay.textContent = title;
+
+            // Highlight active track in list
+            const items = document.querySelectorAll('.playlist-item');
+            items.forEach(item => item.classList.remove('active'));
+            element.classList.add('active');
+        }
+        // Função para reproduzir as músicas locais
+        function playMusic(src, title, element) {
+            const playerMusic = document.getElementById('music-audio-player');
+            const titleDisplay = document.getElementById('music-title');
+
+            playerMusic.src = src;
+            playerMusic.play();
+            titleDisplay.textContent = title;
+
+            // Highlight active track in list
+            const items = document.querySelectorAll('.playlist-item');
+            items.forEach(item => item.classList.remove('active'));
+            element.classList.add('active');
+        }
+        // Função para reproduzir as bandas filarmónicas
+        function playBand(src, title, element) {
+            const playerBand = document.getElementById('band-audio-player');
+            const titleDisplay = document.getElementById('band-name');
+
+            playerBand.src = src;
+            playerBand.play();
+            titleDisplay.textContent = title;
+
+            // Highlight active track in list
+            const items = document.querySelectorAll('.playlist-item');
+            items.forEach(item => item.classList.remove('active'));
+            element.classList.add('active');
+        }
+
+        var players = document.querySelectorAll("audio");
+
+        // 1. Quando um player começa a tocar, pára os outros
+        players.forEach(function (player) {
+            player.addEventListener("play", function () {
+                players.forEach(function (outro) {
+                    if (outro !== player) {
+                        outro.pause();
+                    }
+                });
+            });
+        });
+
+        // 2. Quando mudas de aba (ou minimizas o navegador), pára tudo
+        document.addEventListener("visibilitychange", function () {
+            if (document.hidden) {
+                players.forEach(function (player) {
+                    player.pause();
+                });
+            }
+        });
+        // Lightbox Functions for Photo Gallery
+        function openLightbox(src, caption) {
+            const modal = document.getElementById('lightbox-modal');
+            const modalImg = document.getElementById('modal-img');
+            const modalCap = document.getElementById('modal-caption');
+
+            modal.style.display = 'flex';
+            modalImg.src = src;
+            modalCap.textContent = caption;
+        }
+
+        function closeLightbox() {
+            document.getElementById('lightbox-modal').style.display = 'none';
+        }
+
+        // Close lightbox on Escape key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') closeLightbox();
+        });
+    </script>
+</body>
+
+</html>
